@@ -9,49 +9,29 @@ import { BiUserCircle } from "react-icons/bi";
 import Form from "react-bootstrap/Form";
 import InputGroup from "react-bootstrap/InputGroup";
 import Accordion from "react-bootstrap/Accordion";
+import { useSelector, useDispatch } from "react-redux";
 
 const MessageHeader = () => {
+  const chatRoomName = useSelector(
+    (state: any) => state.chatRoom.currentChatRoom.name
+  );
+  console.log(chatRoomName);
+  
   return (
     <MessageHeaderContainer>
       <Container>
         <Row>
           <Col>
-            <h3>
-              <ImUnlocked /> chatRoom <AiOutlineHeart />
-            </h3>
-          </Col>
-          <Col>
-            <InputGroup className="mb-3">
-              <InputGroup.Text id="basic-addon1">
-                <BiUserCircle />
-              </InputGroup.Text>
-              <Form.Control
-                placeholder="Username"
-                aria-label="Username"
-                aria-describedby="basic-addon1"
-              />
-            </InputGroup>
+            <h4>
+              현재 채팅방
+            </h4>
           </Col>
         </Row>
-
         <Row>
           <Col>
-            <Accordion>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header className="open-talk">
-                  대화창
-                </Accordion.Header>
-                <Accordion.Body>야야</Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
-          </Col>
-          <Col>
-            <Accordion>
-              <Accordion.Item eventKey="0">
-                <Accordion.Header>message</Accordion.Header>
-                <Accordion.Body>Lasd</Accordion.Body>
-              </Accordion.Item>
-            </Accordion>
+            <span>
+              {chatRoomName}
+            </span>
           </Col>
         </Row>
       </Container>
@@ -61,10 +41,14 @@ const MessageHeader = () => {
 
 const MessageHeaderContainer = styled.div`
   width: 100%;
-
-  border: 2px solid #ececec;
-  border-radius: 4px;
   padding: 1rem;
   margin-bottom: 1rem;
+  h4{
+    font-weight : 600;
+  }
+  span{
+    font-weight: 900;
+    font-size: 30px;
+  }
 `;
 export default MessageHeader;

@@ -13,6 +13,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MyMessage from "./MyMessage";
 import YourMessage from "./YourMessage";
+import {uid} from 'react-uid';
 
 const MessagesBody = () => {
   const dispatch = useDispatch();
@@ -59,9 +60,9 @@ const MessagesBody = () => {
     <>
       {msgRender.map((msg, idx) =>
         user?.uid === msg[1] ? (
-          <MyMessage key={idx} text={msg[0]} id={msg[1]} name={msg[2]} />
+          <MyMessage key={uid(idx)} text={msg[0]} id={msg[1]} name={msg[2]} />
         ) : (
-          <YourMessage key={idx} text={msg[0]} id={msg[1]} name={msg[2]} />
+          <YourMessage key={uid(idx)} text={msg[0]} id={msg[1]} name={msg[2]} />
         )
       )}
     </>

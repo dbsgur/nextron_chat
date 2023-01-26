@@ -73,7 +73,7 @@ const ChatRoom = () => {
     return () => {
       off(chatRoomsRef);
     };
-  }, []);
+  }, [chatRoomId]);
 
   // 방읽기
   const addChatRoomsListeners = () => {
