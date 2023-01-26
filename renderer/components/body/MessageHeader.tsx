@@ -3,13 +3,7 @@ import styled from "styled-components";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
-import { ImUnlocked } from "react-icons/im";
-import { AiOutlineHeart } from "react-icons/ai";
-import { BiUserCircle } from "react-icons/bi";
-import Form from "react-bootstrap/Form";
-import InputGroup from "react-bootstrap/InputGroup";
-import Accordion from "react-bootstrap/Accordion";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 const MessageHeader = () => {
   const chatRoomName = useSelector(

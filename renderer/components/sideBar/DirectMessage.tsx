@@ -2,10 +2,6 @@ import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setCurrentChatRoom,
-  setPrivateChatRoom,
-} from "../../redux/actions/chat_action";
 import { onChildAdded, ref } from "firebase/database";
 import { dataBase } from "../../../models/firebase_auth";
 
@@ -14,7 +10,6 @@ const DirectMessage: NextPage = () => {
   const usersRef = ref(dataBase, "user");
   const user = useSelector((state: any) => state.user.currentUser);
   const [users, setUsers] = useState([]);
-  const [activeChatRoomId, setActiveChatRoomId] = useState("");
 
   useEffect(() => {
     if (user) {
