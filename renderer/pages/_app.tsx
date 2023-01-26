@@ -3,7 +3,6 @@ import type { AppProps } from "next/app";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { wrapper } from "../redux/store";
 import { useEffect } from "react";
-// import { onAuthStateChanged } from "firebase/auth";
 import { useDispatch } from "react-redux";
 import { setUser, clearUser } from "../redux/actions/user_action";
 import { useRouter } from "next/router";

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 import styled from "styled-components";
-// import { HiOutlineEmojiHappy } from "react-icons/hi";
 import { AiOutlinePlus } from "react-icons/ai";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
@@ -45,7 +44,7 @@ const ChatRoom = () => {
     }
   };
   const isFormValid = (name, description) => name && description;
-  // 방추가
+
   const addChatRoom = async () => {
     const key = push(chatRoomsRef).key;
     const newChatRoom = {
@@ -54,7 +53,6 @@ const ChatRoom = () => {
       description,
       createdBy: {
         name: user.displayName,
-        // image: user.photoURL,
       },
     };
     try {
@@ -68,27 +66,24 @@ const ChatRoom = () => {
   };
   useEffect(() => {
     addChatRoomsListeners();
-    console.log("activeChatRoomId ", activeChatRoomId);
 
     return () => {
       off(chatRoomsRef);
     };
   }, [chatRoomId]);
 
-  // 방읽기
   const addChatRoomsListeners = () => {
     let chatRoomsArray = [];
     onChildAdded(chatRoomsRef, (DataSnapshot) => {
       chatRoomsArray.push(DataSnapshot.val());
       setChatRooms(chatRoomsArray);
-
-      // , () => setFirstChatRoom();
     });
-    setFirstChatRoom();
   };
 
   const setFirstChatRoom = () => {
     const firstChatRoom = chatRooms[0];
+    console.log(firstChatRoom);
+
     if (firstLoad && chatRooms.length > 0) {
       dispatch(setCurrentChatRoom(firstChatRoom));
       setActiveChatRoomId(firstChatRoom.id);
@@ -96,45 +91,40 @@ const ChatRoom = () => {
     setFirstLoad(false);
   };
 
+  useEffect(() => {
+    if (chatRooms.length) {
+      setFirstChatRoom();
+    }
+  });
+
   const renderChatRooms = (chatRooms) =>
     chatRooms.length > 0 &&
     chatRooms.map((room) => (
       <li
         key={room.id}
         onClick={() => changeChatRoom(room)}
-        style={{
-          backgroundColor: room.id === activeChatRoomId && "#ffffff45",
-        }}
         className="current-room"
       >
-        # {room.name}
+        {room.name}
       </li>
     ));
 
   const changeChatRoom = (room) => {
     dispatch(setCurrentChatRoom(room));
     dispatch(setPrivateChatRoom(false));
-    // console.log(`room : ${room}`);
-    // console.log(`room ID: ${room.id}`);
-    // console.log(`user :${JSON.stringify(user)}`);
-    // console.log(`chatRoomId :${JSON.stringify(chatRoomId)}`);
 
     setActiveChatRoomId(room.id);
   };
   return (
     <ChatRoomContainer>
       <div className="chatroom-wrap">
-        {/* <div>
-          <HiOutlineEmojiHappy /> */}
-        채팅방 목록{activeChatRoomId}
-        {/* </div> */}
+        채팅방 목록
         <div onClick={handleShow} className="pluse-button">
           <AiOutlinePlus />
         </div>
       </div>
       <ul className="rooms-list">{renderChatRooms(chatRooms)}</ul>
 
-      {/* 방 생성 모달 */}
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>create chatRoom</Modal.Title>
@@ -178,6 +168,7 @@ const ChatRoomContainer = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-weight: 800;
     .pluse-button {
       cursor: pointer;
       font-size: 26px;
@@ -185,12 +176,11 @@ const ChatRoomContainer = styled.div`
   }
   .rooms-list {
     list-style-type: none;
+    padding: 0;
     margin-top: 5px;
     cursor: pointer;
     .current-room {
-      border-radius: 5px;
-      padding: 5px;
-      font-size: 12px;
+      font-size: 16px;
     }
   }
 `;

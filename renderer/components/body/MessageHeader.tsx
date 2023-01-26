@@ -15,23 +15,18 @@ const MessageHeader = () => {
   const chatRoomName = useSelector(
     (state: any) => state.chatRoom.currentChatRoom.name
   );
-  console.log(chatRoomName);
-  
+
   return (
     <MessageHeaderContainer>
       <Container>
         <Row>
           <Col>
-            <h4>
-              현재 채팅방
-            </h4>
+            <h4>현재 채팅방</h4>
           </Col>
         </Row>
         <Row>
           <Col>
-            <span>
-              {chatRoomName}
-            </span>
+            <span>{chatRoomName}</span>
           </Col>
         </Row>
       </Container>
@@ -43,10 +38,10 @@ const MessageHeaderContainer = styled.div`
   width: 100%;
   padding: 1rem;
   margin-bottom: 1rem;
-  h4{
-    font-weight : 600;
+  h4 {
+    font-weight: 600;
   }
-  span{
+  span {
     font-weight: 900;
     font-size: 30px;
   }

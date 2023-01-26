@@ -46,10 +46,5 @@ export const dataBase = getDatabase(fbApp);
 
 export function getChats() {
   let chats = [];
-  // dataBase.("chats").on("value", (snapshot) => {
-  //   snapshot.forEach((row) => {
-  //     chats.push(row.val());
-  //   });
-  // });
   return chats;
 }

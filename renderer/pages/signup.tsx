@@ -39,14 +39,16 @@ const Signup: NextPage = () => {
 
       await updateProfile(fbAuth.currentUser, {
         displayName: data.name,
-        // photoURL: `http://gravatar.com/avatar/${md5(
-        //   createdUser.user.email
-        // )}?d=identicon`,
       });
 
       await set(child(ref(dataBase, `user`), createdUser.user.uid), {
         name: createdUser.user.displayName,
-        // image: createdUser.user.photoURL,
+      });
+
+      await set(child(ref(dataBase, `chatRooms`), createdUser.user.uid), {
+        name: createdUser.user.displayName,
+        email: createdUser.user.email,
+        id: createdUser.user.uid,
       });
 
       setLoading(false);

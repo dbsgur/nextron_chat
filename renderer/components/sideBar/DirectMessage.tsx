@@ -1,5 +1,3 @@
-import { HiOutlineEmojiHappy } from "react-icons/hi";
-import { AiOutlinePlus } from "react-icons/ai";
 import styled from "styled-components";
 import { useEffect, useState } from "react";
 import { NextPage } from "next";
@@ -27,68 +25,34 @@ const DirectMessage: NextPage = () => {
   const addUsersListeners = (currentUserUid) => {
     let usersArray = [];
     onChildAdded(usersRef, (DataSnapshot) => {
-      if (currentUserUid !== DataSnapshot.key) {
-        let user = DataSnapshot.val();
-        user["uid"] = DataSnapshot.key;
-        user["status"] = "offline";
-        usersArray.push(user);
-        setUsers(usersArray);
-      }
+      let user = DataSnapshot.val();
+      user["uid"] = DataSnapshot.key;
+      user["status"] = "offline";
+      usersArray.push(user);
+      setUsers(usersArray);
     });
   };
 
   const renderDirectMessages = (users) =>
     users.length > 0 &&
-    users.map((user) => (
-      <li
-        key={user.uid}
-        onClick={() => {
-          changeChat(user);
-        }}
-        style={{
-          backgroundColor: user.id === activeChatRoomId && "#ffffff45",
-        }}
-        className="direct-room"
-      >
-        # {user.name}
-      </li>
-    ));
+    users.map((user) => <li key={user.uid}>{user.name}</li>);
 
-  const changeChat = (user) => {
-    const chatRoomId = getChatRoomId(user.uid);
-    const chatRoomData = {
-      id: chatRoomId,
-      name: user.name,
-    };
-    dispatch(setCurrentChatRoom(chatRoomData));
-    dispatch(setPrivateChatRoom(false));
-    setActiveChatRoomId(user.uid);
-  };
-
-  const getChatRoomId = (userId) => {
-    const currentId = user.id;
-    return userId > currentId
-      ? `${userId}/${currentId}`
-      : `${currentId}/${userId}`;
-  };
   return (
     <DirectMessageContainer>
-      <div>
-        <HiOutlineEmojiHappy />
-        DirectMessage
-      </div>
+      <span>USER LIST</span>
       <ul className="direct-list">{renderDirectMessages(users)}</ul>
     </DirectMessageContainer>
   );
 };
 
 const DirectMessageContainer = styled.div`
+  span {
+    font-weight: 800;
+    font-size: 20px;
+  }
   .direct-list {
     list-style-type: none;
     padding: 0;
-  }
-  .direct-room {
-    cursor: pointer;
   }
 `;
 export default DirectMessage;

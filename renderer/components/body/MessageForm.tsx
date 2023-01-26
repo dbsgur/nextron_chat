@@ -37,16 +37,11 @@ const MessageForm = () => {
   };
 
   const handleMessage = async (e) => {
-    console.log("click");
-
     if (!text) {
       setError((pre) => pre.concat("Type text First"));
       return;
     }
     setLoading(true);
-    //
-    // console.log(`chatRoom.uid : ${chatRoom.id}`);
-    // console.log(`chatRoom: ${JSON.stringify(chatRoom)}`);
 
     try {
       await set(push(child(messageRef, chatRoom.id)), createMessage());
@@ -56,7 +51,6 @@ const MessageForm = () => {
     } catch (error) {
       e.preventDefault();
       setLoading(false);
-      console.log(error);
       setTimeout(() => {
         setError([]);
       }, 5000);
@@ -85,45 +79,32 @@ const MessageForm = () => {
             </Form>
           </Col>
           <Col md={2}>
-            <div>
-              <button className="send" onClick={handleMessage}>
-                send
-              </button>
-            </div>
+            <button onClick={handleMessage}>send</button>
           </Col>
         </Row>
-      </Container>
-      <Container>
-        <button type="submit">load</button>
       </Container>
     </MessageFormContainer>
   );
 };
 
 const MessageFormContainer = styled.div`
-  margin-top: 10px;
+  width: 90%;
+
   button {
     width: 100%;
     color: white;
-    text-transform: uppercase;
+    background-color: #566270;
     border: none;
-    border-radius: 10px;
-    padding: 7px;
+    border-radius: 5px;
+    padding: 10px;
     font-size: 16px;
     font-weight: 700;
-    letter-spacing: 10px;
+    letter-spacing: 8px;
     margin-bottom: 10px;
   }
 
   button:hover {
-    background: #e46390;
-  }
-  .text-form {
-    padding: 10px;
-    margin-bottom: 10px;
-  }
-  .send {
-    margin-top: 0px;
+    background: #111111;
   }
   .error {
     color: red;

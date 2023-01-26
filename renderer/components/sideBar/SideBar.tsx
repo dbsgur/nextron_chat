@@ -1,12 +1,12 @@
 import styled from "styled-components";
 import ChatRoom from "./ChatRoom";
 import DirectMessage from "./DirectMessage";
-import UserPanel from "./MyAccount";
+import MyAccount from "./MyAccount";
 
 const SideBar = () => {
   return (
     <SidePanelContainer>
-      <UserPanel />
+      <MyAccount />
       <ChatRoom />
       <DirectMessage />
     </SidePanelContainer>
@@ -19,6 +19,6 @@ const SidePanelContainer = styled.div`
   height: 100vh;
   color: white;
   font-weight: 600;
-  min-width: 150px;
+  min-width: 185px;
 `;
 export default SideBar;

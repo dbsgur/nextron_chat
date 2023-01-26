@@ -13,7 +13,7 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MyMessage from "./MyMessage";
 import YourMessage from "./YourMessage";
-import {uid} from 'react-uid';
+import { uid } from "react-uid";
 
 const MessagesBody = () => {
   const dispatch = useDispatch();
@@ -36,12 +36,14 @@ const MessagesBody = () => {
 
   const getMessages = () => {
     let messagesDB = [];
+    let flag = false;
     onChildAdded(messagesRef, (DataSnapshot) => {
       const data = DataSnapshot.key;
+
       if (data === chatRoomId) {
         messagesDB.push(DataSnapshot.val());
-        setMsgRender([]);
         let tmp = [];
+        setMsgRender([]);
         messagesDB?.map((message) => {
           for (let key in message) {
             tmp.push([
@@ -52,8 +54,10 @@ const MessagesBody = () => {
           }
         });
         setMsgRender(tmp);
+        flag = true;
       }
     });
+    if (!flag) setMsgRender([]);
   };
 
   return (

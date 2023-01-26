@@ -13,12 +13,13 @@ const userlist: NextPage = () => {
 };
 
 const SideBarContainer = styled(SideBar)`
-  width: 300px;
+  width: 200px;
   height: 100vh;
+  width: 25%;
 `;
 
 const BodyContainer = styled(Body)`
-  width: 100%;
+  width: 75%;
   height: 100vh;
 `;
 
